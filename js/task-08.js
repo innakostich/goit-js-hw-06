@@ -8,24 +8,48 @@
 //   Для доступа к элементам формы используй свойство elements.
 // Выведи обьект с введенными данными в консоль и очисти значения полей формы методом reset.
 
-const loginForm = document.querySelector(".login-form");
+// const loginForm = document.querySelector(".login-form");
 
-loginForm.addEventListener("submit", (event) => {
-  event.preventDefault();
+// loginForm.addEventListener("submit", (event) => {
+//   event.preventDefault();
   
-  const emailInput = loginForm.elements.email;
-  const passwordInput = loginForm.elements.password;
+//   const emailInput = loginForm.elements.email;
+//   const passwordInput = loginForm.elements.password;
 
-  if (emailInput.value == passwordInput.value) {
-    alert('Please fill in all fields.'); 
-    const formData = {
-      email: emailInput.value,
-      password: passwordInput.value,
-    };
+//   if (emailInput.value == passwordInput.value) {
+//     alert('Please fill in all fields.'); 
+//     const formData = {
+//       email: emailInput.value,
+//       password: passwordInput.value,
+//     };
 
-    console.log(formData); 
-    loginForm.reset(); 
+//     console.log(formData); 
+//     loginForm.reset(); 
+//   }
+// });
+
+const loginForm = document.querySelector('.login-form');
+
+loginForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const formData = new FormData(loginForm);
+  const data = {};
+
+  for (const [name, value] of formData) {
+    if (!value) {
+      alert('Please fill in all fields.');
+      return;
+    }
+
+    data[name] = value;
   }
+
+  console.log(data);
+  loginForm.reset();
 });
+
+
+
 
 
